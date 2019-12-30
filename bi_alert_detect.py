@@ -819,6 +819,7 @@ if __name__ == "__main__":
     ai_detector = AIObjectDetector(MODEL_TYPE)
 
     # Set up MQTT subscriber - TODO!!! Error trapping....
+<<<<<<< HEAD
     # mqtt_client = mqtt.Client() Oscar Changed
     mqtt_client = mqtt.Client(config.MQTT_SERVER, True, None, mqtt.MQTTv31)
     mqtt_client.username_pw_set(config.MQTT_USER, config.MQTT_PW)
@@ -830,6 +831,17 @@ if __name__ == "__main__":
     print("Model initalised. Connecting to mqtt server | %s" % config.MQTT_SERVER)
     # mqtt_client.connect(config.MQTT_SERVER, port=1883, keepalive=0, bind_address="") Oscar Changed
     mqtt_client.connect(config.MQTT_SERVER)
+=======
+    mqtt_client = mqtt.Client()
+    mqtt_client.username_pw_set(config.MQTT_USER, config.MQTT_PW)
+    mqtt_client.on_connect = mqtt_on_connect
+    mqtt_client.on_message = mqtt_on_message
+    # mqtt_client.on_log = mqtt_on_log
+    mqtt_client.on_disconnect = mqtt_on_disconnect
+
+    print("Model initalised. Connecting to mqtt server %s" % config.MQTT_SERVER)
+    mqtt_client.connect(config.MQTT_SERVER, port=1883, keepalive=0, bind_address="")
+>>>>>>> 811b51b3d92c9ed06139402adb17edd7a6bcde82
 
     print("Subscribing to mqtt topic '%s'" % config.MQTT_LISTEN_TOPIC)
     mqtt_client.subscribe(config.MQTT_LISTEN_TOPIC)
